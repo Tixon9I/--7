@@ -19,3 +19,14 @@ jobs:
         pip install -r requirements.txt
     - name: Запуск тестів
       run: pytest -v
+
+  docker-build-and-deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Клонування репозиторію
+      uses: actions/checkout@v3
+    - name: Побудова Docker-образу
+      run: docker build -t my-python-app .
+    - name: Симуляція деплою
+      run: echo "Деплой на staging-сервер виконано успішно (імітація)"
